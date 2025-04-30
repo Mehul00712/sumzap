@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">Temporary Email Generator</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Generate a temporary email address that will expire in 3 hours.</p>
+                
+                {% if email and password %}
+                    <div class="alert alert-success">
+                        <h2 class="h4">Your Temporary Email:</h2>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="{{ email }}" id="tempEmail" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('tempEmail')">Copy</button>
+                        </div>
+                        
+                        <h2 class="h4 mt-3">Password:</h2>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="{{ password }}" id="tempPassword" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('tempPassword')">Copy</button>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-3">
+                            <strong>Important:</strong> This email will expire in 3 hours. Make sure to save any important information before it expires.
+                        </div>
+                    </div>
+                {% else %}
+                    <form method="POST">
+                        <button type="submit" class="btn btn-primary">Generate Temporary Email</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="h4 mb-0">About Temporary Emails</h2>
+            </div>
+            <div class="card-body">
+                <p>Temporary email addresses can be used to protect your privacy when signing up for services you don't want to receive ongoing communications from.</p>
+                <p><strong>Note:</strong> These are disposable addresses and should not be used for important accounts or communications you need to keep.</p>
+                <div class="alert alert-info">
+                    <strong>Legal Notice:</strong> This feature provides a disposable email service. It is not specifically targeting any particular email provider and should be used responsibly and in accordance with all applicable laws and terms of service.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    
+    // Show a temporary "Copied!" message
+    var button = copyText.nextElementSibling;
+    var originalText = button.innerHTML;
+    button.innerHTML = "Copied!";
+    setTimeout(function() {
+        button.innerHTML = originalText;
+    }, 2000);
+}
+</script>
+{% endblock %} 

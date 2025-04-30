@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">AI Document Summarizer</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Upload your document (PDF or Word) and get an AI-powered summary in seconds!</p>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.document.label(class="form-label") }}
+                        {{ form.document(class="form-control") }}
+                        {% if form.document.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.document.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">Supported formats: PDF, DOC, DOCX</div>
+                    </div>
+                    
+                    {{ form.submit(class="btn btn-primary") }}
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="h4 mb-0">About Sumzap</h2>
+            </div>
+            <div class="card-body">
+                <p>Sumzap uses advanced AI technology to analyze and summarize your documents, helping you save time and extract key information quickly.</p>
+                <h3 class="h5">Features:</h3>
+                <ul>
+                    <li>Upload PDF and Word documents</li>
+                    <li>Get instant AI-generated summaries</li>
+                    <li>Convert PDF to Word documents</li>
+                    <li>Generate temporary email addresses</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

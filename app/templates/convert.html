@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h3 mb-0">PDF to Word Converter</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead">Upload your PDF file and convert it to a Word document (.docx).</p>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.pdf_file.label(class="form-label") }}
+                        {{ form.pdf_file(class="form-control") }}
+                        {% if form.pdf_file.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.pdf_file.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">Only PDF files are accepted.</div>
+                    </div>
+                    
+                    {{ form.submit(class="btn btn-primary") }}
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2 class="h4 mb-0">How It Works</h2>
+            </div>
+            <div class="card-body">
+                <p>Our PDF to Word converter extracts the text content from your PDF document and creates a new Word document (.docx) format.</p>
+                <p><strong>Note:</strong> The conversion works best with text-based PDFs. Complex layouts, images, and tables may not convert perfectly.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
