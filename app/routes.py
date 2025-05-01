@@ -78,6 +78,10 @@ def temp_email():
         return render_template('temp_email.html', email=email, password=password, title='Temporary Email')
     
     return render_template('temp_email.html', title='Temporary Email')
+    
+@main.route('/healthz')
+def health_check():
+    return "OK", 200    
 
 @main.errorhandler(404)
 def page_not_found(e):
